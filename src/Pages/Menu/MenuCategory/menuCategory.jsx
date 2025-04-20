@@ -17,7 +17,7 @@ const MenuCategory = ({items,title,details,img}) => {
 
 
     </div>
-    <Link >
+    <Link to={`/order/${title}`}>
     <button className="btn btn-outline border-0 border-b-4  mt-2 text-center">ORDER YOUR FAVOURITE FOOD</button>
     </Link>
  
