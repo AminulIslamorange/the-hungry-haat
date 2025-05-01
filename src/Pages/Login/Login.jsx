@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import loginImg from '../../assets/others/authentication2.png';
 import bgImg from '../../assets/others/authentication.png'
-import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef } from "react";
+import { loadCaptchaEnginge, LoadCanvasTemplate,validateCaptcha } from 'react-simple-captcha';
+import { useEffect, useRef, useState } from "react";
 
 
 const Login = () => {
     const captchaRef=useRef(null);
+    const [disabled,setDisabled]=useState(true);
     useEffect(()=>{
         loadCaptchaEnginge(6)
 
@@ -19,7 +20,15 @@ const Login = () => {
         console.log(email,password)
     }
     const handleValidateCaptcha=()=>{
-        const value=captchaRef.current.value;
+        const user_captcha_value=captchaRef.current.value;
+        if (validateCaptcha(user_captcha_value)==true) {
+            setDisabled(false)
+        }
+   
+        else {
+            setDisabled(true)
+        }
+    
 
     }
     return (
@@ -58,7 +67,7 @@ const Login = () => {
                        <button onClick={handleValidateCaptcha} className="btn btn-outline btn-xs mt-2">Validate</button>
                     </div>
                     <div className="form-control mt-6">
-                        <input  type="submit" value="Login" className="btn bg-[#D1A054] text-white hover:bg-[#b88640]"/>
+                        <input disabled={disabled}  type="submit" value="Login" className="btn bg-[#D1A054] text-white hover:bg-[#b88640]"/>
                     </div>
                 </form>
                 <p className='text-[#D1A054] text-center'>New here? <small><Link to='/signUp'className="text-[#D1A054] underline hover:text-blue-700">Create a New Account</Link></small></p>
