@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import loginImg from '../../assets/others/authentication2.png';
 import bgImg from '../../assets/others/authentication.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate,validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 
 const Login = () => {
+    const {signInUser}=useContext(AuthContext);
     const captchaRef=useRef(null);
     const [disabled,setDisabled]=useState(true);
     useEffect(()=>{
@@ -17,7 +19,11 @@ const Login = () => {
         const form=e.target;
         const email=form.email.value;
         const password=form.password.value;
-        console.log(email,password)
+        signInUser(email,password)
+        .then(result=>{
+            const user=result.user;
+            console.log(user)
+        })
     }
     const handleValidateCaptcha=()=>{
         const user_captcha_value=captchaRef.current.value;
