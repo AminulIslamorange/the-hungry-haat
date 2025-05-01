@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import loginImg from '../../assets/others/authentication1.png'
 import bgImg from '../../assets/others/authentication.png';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const SignUp = () => {
+    const {createUser}=useContext(AuthContext);
 const {register, handleSubmit,formState: { errors }}=useForm();
-const onSubmit= (data) => console.log(data)
+const onSubmit= (data) => {
+
+    createUser(data.email,data.password)
+    .then(result=>{
+        const user=result.user;
+        console.log(user)
+    })
+    
+    
+    console.log(data)}
     return (
         <div
             className="hero bg-base-200 min-h-screen"
