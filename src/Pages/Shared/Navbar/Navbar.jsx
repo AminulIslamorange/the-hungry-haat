@@ -22,7 +22,7 @@ const Navbar = () => {
         <Link to="/order/salad">Order</Link>
       </li>
       {
-        user?<><button onClick={handleLogOut}>Logout</button> </>:
+        user?<><span>{user?.displayName}</span> <button onClick={handleLogOut}>Logout</button> </>:
         <li>
         <Link to="/login">Login</Link>
       </li>

@@ -1,19 +1,36 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/others/authentication1.png'
 import bgImg from '../../assets/others/authentication.png';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
-    const {createUser}=useContext(AuthContext);
-const {register, handleSubmit,formState: { errors }}=useForm();
+    const {createUser,updateUserProfile}=useContext(AuthContext);
+const {register, handleSubmit,reset,formState: { errors }}=useForm();
+const navigate=useNavigate();
+const location=useLocation();
+const from = location.state?.from?.pathname || "/";
 const onSubmit= (data) => {
 
     createUser(data.email,data.password)
     .then(result=>{
         const user=result.user;
-        console.log(user)
+        console.log(user);
+        updateUserProfile(data.name,data.photoURL)
+        .then(()=>{
+            reset();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User data updated Successfully",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              navigate(from, { replace: true });
+        })
+        .catch(error=>console.error(error))
     })
     
     
