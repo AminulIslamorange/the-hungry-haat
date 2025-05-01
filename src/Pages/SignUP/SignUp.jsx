@@ -2,8 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import loginImg from '../../assets/others/authentication1.png'
 import bgImg from '../../assets/others/authentication.png';
+import { useForm } from 'react-hook-form';
 
 const SignUp = () => {
+const {register, handleSubmit,formState: { errors }}=useForm();
+const onSubmit= (data) => console.log(data)
     return (
         <div
             className="hero bg-base-200 min-h-screen"
@@ -13,7 +16,7 @@ const SignUp = () => {
                 {/* Login Form - Shadow Added */}
                 <div className="card bg-base-100 w-1/2 max-w-sm shrink-0 shadow-2xl rounded-xl p-6">
                     <h1 className="text-4xl font-bold text-center">Sign Up </h1>
-                    <form className="card-body">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Name</span>
@@ -51,9 +54,9 @@ const SignUp = () => {
                     <p className="text-[#D1A054] text-center">
                         Already have an account?{" "}
                         <small>
-                            <link to="/login" className="text-[#D1A054] underline hover:text-blue-700">
+                            <Link to="/login" className="text-[#D1A054] underline hover:text-blue-700">
                                 Please Login
-                            </link>
+                            </Link>
                         </small>
                     </p>
                 
