@@ -7,9 +7,11 @@ import { MdOutlineContactPhone } from "react-icons/md";
 import { TbBrandBooking } from "react-icons/tb";
 import { GoCodeReview } from "react-icons/go";
 import { NavLink, Outlet } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
 
 const Dashboard = () => {
+    const [cart]=useCart();
     return (
         <div className="flex">
             {/* for navigation */}
@@ -25,7 +27,7 @@ const Dashboard = () => {
                                 <NavLink to='/dashboard/payment'><FaPaypal /> Payment </NavLink>
                             </li>
                             <li>
-                                <NavLink to='/dashboard/cart'><FaShoppingCart /> My Cart </NavLink>
+                                <NavLink to='/dashboard/cart'><FaShoppingCart /> My Cart ({cart.length}) </NavLink>
                             </li>
                             <li>
                                 <NavLink to='/dashboard/review'><GoCodeReview /> Add Review</NavLink>
