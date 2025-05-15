@@ -24,7 +24,7 @@ const Navbar = () => {
         <Link to="/order/salad">Order</Link>
       </li>
       <li>
-        <Link>
+        <Link to='/dashboard/cart'>
           
           <button className="btn">
           <FaShoppingCart />
