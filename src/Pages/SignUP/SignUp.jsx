@@ -1,12 +1,16 @@
-import React, { useContext } from 'react';
+import{ useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/others/authentication1.png'
 import bgImg from '../../assets/others/authentication.png';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+
 
 const SignUp = () => {
+    const axiosPublic=useAxiosPublic();
+    
     const {createUser,updateUserProfile}=useContext(AuthContext);
 const {register, handleSubmit,reset,formState: { errors }}=useForm();
 const navigate=useNavigate();
@@ -20,7 +24,15 @@ const onSubmit= (data) => {
         console.log(user);
         updateUserProfile(data.name,data.photoURL)
         .then(()=>{
-            reset();
+            // create user Entry to the database
+            const userInfo={
+                email:data.email,
+                name:data.name,
+            }
+            axiosPublic.post('/users',userInfo)
+            .then(res=>{
+                if(res.data.insertedId>0){
+                    reset();
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -29,6 +41,11 @@ const onSubmit= (data) => {
                 timer: 1500
               });
               navigate(from, { replace: true });
+
+            }
+            })
+
+            
         })
         .catch(error=>console.error(error))
     })
