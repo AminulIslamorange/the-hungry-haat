@@ -10,8 +10,7 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const SignUp = () => {
     const axiosPublic=useAxiosPublic();
-    
-    const {createUser,updateUserProfile}=useContext(AuthContext);
+   const {createUser,updateUserProfile}=useContext(AuthContext);
 const {register, handleSubmit,reset,formState: { errors }}=useForm();
 const navigate=useNavigate();
 const location=useLocation();
@@ -31,7 +30,7 @@ const onSubmit= (data) => {
             }
             axiosPublic.post('/users',userInfo)
             .then(res=>{
-                if(res.data.insertedId>0){
+                if(res.data.insertedId){
                     reset();
             Swal.fire({
                 position: "top-end",
