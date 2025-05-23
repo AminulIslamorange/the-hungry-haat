@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
+import SocialLogin from '../../components/SectionTitle/SocialLogin';
 
 
 const SignUp = () => {
@@ -95,6 +96,7 @@ const onSubmit= (data) => {
                             <input type="submit" value="Sign Up" className="btn bg-[#D1A054] text-white hover:bg-[#b88640]" />
                         </div>
                     </form>
+                    <SocialLogin></SocialLogin>
                     <p className="text-[#D1A054] text-center">
                         Already have an account?{" "}
                         <small>

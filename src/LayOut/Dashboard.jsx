@@ -1,10 +1,11 @@
 
-import { FaCalendar, FaHome, FaPaypal, FaShoppingCart, } from "react-icons/fa";
+import { FaAd, FaCalendar, FaHome, FaList, FaPaypal, FaShoppingCart, FaUsers, FaUtensils, } from "react-icons/fa";
+import { TbBrandBooking } from "react-icons/tb";
 
 import { IoMenu } from "react-icons/io5";
 import { FaShopify } from "react-icons/fa";
 import { MdOutlineContactPhone } from "react-icons/md";
-import { TbBrandBooking } from "react-icons/tb";
+
 import { GoCodeReview } from "react-icons/go";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
@@ -12,12 +13,35 @@ import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
     const [cart]=useCart();
+
+    // Todo get for admin
+    const isAdmin=true;
     return (
         <div className="flex">
             {/* for navigation */}
             <div className="w-64 min-h-screen bg-[#D1A054]">
                 <ul   className="menu p-4 gap-4">
-                    <li>
+                    {
+                        isAdmin?<>
+                        <li>
+                                <NavLink to='/dashboard/adminHome'><FaHome /> Admin Home</NavLink>
+                            </li>
+                        <li>
+                                <NavLink to='/dashboard/addItems'><FaUtensils /> add items</NavLink>
+                            </li>
+                        <li>
+                                <NavLink to='/dashboard/manageItems'><FaList/> manage items</NavLink>
+                            </li>
+                        <li>
+                                <NavLink to='/dashboard/manageBooking'><TbBrandBooking /> Manage bookings</NavLink>
+                            </li>
+                        <li>
+                                <NavLink to='/dashboard/allUsers'><FaUsers /> all users</NavLink>
+                            </li>
+
+                        
+                        </>:<>
+                        <li>
                                 <NavLink to='/dashboard/userHome'><FaHome /> User Home</NavLink>
                             </li>
                             <li>
@@ -34,7 +58,8 @@ const Dashboard = () => {
                             </li>
                             <li>
                                 <NavLink to='/dashboard/booking'><TbBrandBooking />My Booking</NavLink>
-                            </li>
+                            </li></>
+                    }
                              <div className="divider"></div>
                     {/* common navlink for admin and user */}
                     <li>
