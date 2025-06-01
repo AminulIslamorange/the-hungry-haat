@@ -23,7 +23,7 @@ const Dashboard = () => {
             <div className="w-64 min-h-screen bg-[#D1A054]">
                 <ul   className="menu p-4 gap-4">
                     {
-                        isAdmin?<>
+                        isAdmin? <>
                         <li>
                                 <NavLink to='/dashboard/adminHome'><FaHome /> Admin Home</NavLink>
                             </li>
