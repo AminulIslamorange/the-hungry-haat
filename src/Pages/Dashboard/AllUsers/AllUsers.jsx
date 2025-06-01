@@ -14,6 +14,18 @@ const AllUsers = () => {
       return res.data;
     },
   });
+  // This is First code for jwt token
+  //  const { data: users = [], refetch } = useQuery({
+  //   queryKey: ["users"],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get("/users",{
+  //       headers:{
+  //         authorization:`Bearer ${localStorage.getItem('access-token')}`
+  //       }
+  //     });
+  //     return res.data;
+  //   },
+  // });
 
   const handleDelteUser = (user) => {
     Swal.fire({
@@ -85,10 +97,7 @@ const AllUsers = () => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    {/* { user.role==='admin'? 'Admin' : <button onClick={()=>{handleMakeAdmin(user)}}
-              className="btn btn-ghost text-xl bg-[#D1A054]">
-                <FaUsers/>
-              </button>} */}
+                   
                     {user.role==='admin'? 'Admin' : <button
                       onClick={() => {
                         handleMakeAdmin(user);
