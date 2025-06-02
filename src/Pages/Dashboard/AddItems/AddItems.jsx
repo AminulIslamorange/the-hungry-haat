@@ -9,7 +9,7 @@ const imgage_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_k
 const AddItems = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,reset } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
     // need to image upload to imagebibi and then get an url
@@ -31,6 +31,7 @@ const AddItems = () => {
       // now data send to database post api
       const menuRes = await axiosSecure.post("/menu", menuItem);
       if (menuRes.data.insertedId) {
+        reset();
         Swal.fire({
           position: "top-end",
           icon: "success",
